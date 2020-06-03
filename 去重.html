@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组去重</title>
+  </head>
+  <body>
+    <script>
+      var arr = [1,1,1,2,3,4,2,3,4];
+      //一、 双重for循环去重
+      // for(let i=0;i<arr.length;i++){
+      //     for(let j=i+1;j<arr.length;j++){
+      //         if(arr[i]==arr[j]){
+      //             arr.splice(j,1)
+      //         }
+      //     }
+      // }
+      // 双重for循环去重并排序
+      // for(let i=0;i<arr.length;i++){
+      //     for(let j=i+1;j<arr.length;j++){
+      //         if(arr[i]==arr[j]){
+      //             arr.splice(j,1)
+      //         }
+      //         if(arr[i]>arr[j]){
+      //             var temp =arr[i]
+      //             arr[i] =arr[j]
+      //             arr[j] =temp
+      //         }
+      //     }
+      // }
+      //  console.log(arr);
+
+
+   
+      
+      // 二、或者用es6的set方法去重后是对象,1.用Array.from转换为数组
+      // var qu = new Set(arr);
+
+      // console.log(Array.from(qu));
+
+
+
+
+    // 三、使用数组的reduce方法去重
+    // 第一个参数为回调函数（回调函数里面第一个值为上一次return的结果，第二个值为下一项），第二个参数为初始值
+    // var res = arr.reduce((shang,xia)=>{
+    //     if(shang.indexOf(xia)==-1){
+    //         shang.push(xia)
+    //     }
+    //     return shang
+    // },[])
+    // console.log(res);
+
+
+
+
+     //  四、 indexOf去重
+    //   var arr1 = []
+    //   for(let i=0;i<arr.length;i++){
+    //       if(arr1.indexOf(arr[i])==-1){
+    //           arr1.push(arr[i])
+    //       }
+    //   }
+    //   console.log(arr1);
+    </script>
+  </body>
+</html>

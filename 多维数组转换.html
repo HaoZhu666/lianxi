@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+        // 多维数组转换为一维数组就是将原数组转换为字符串然后用字符串的split方法拆分为数组
+      var arr = [[1,2],[[3,4],[5]]]
+      // 第一种
+      // console.log(arr.join().split(','));
+      // 第二种转换为一维数组并将值转换为数字
+    //   var arr1= arr.toString().split(',')
+    //   var arr2 = []
+    //   for(let i =0;i<arr1.length;i++){
+         
+    //       arr2.push(Number(arr1[i]))
+    //   }
+    //   console.log(arr2);
+      // 第三种
+      // console.log((arr+'').split(','));
+      // 第四种
+      // let arr = [1, 2, 3, 4, 5, [6, 7, 8, [9, 10, 11, 12, [13, 14, 15, 16]]]]
+      // console.log(arr + '')    // 输出为：1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
+      // let newArr = (arr + '').split(',')
+      // console.log(newArr)   // 输出为：["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"]
+      // let numberArr = [] // 用于存放新的number类型的数组
+      // newArr.forEach(function (data, index, arr) {
+      //   numberArr.push(+data)
+      // })
+      // console.log(numberArr)
+    //   promise
+    </script>
+  </body>
+</html>

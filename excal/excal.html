@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+      crossorigin="anonymous"
+    />
+    <script src="./vue.js"></script>
+    <style>
+      #app {
+        position: relative;
+      }
+      #mask {
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      #box {
+        width: 400px;
+        height: 500px;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        margin-left: -150px;
+        margin-top: -200px;
+        background-color: #fff;
+        z-index: 99;
+        padding: 20px;
+        border-radius: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <div id="mask" v-if="isShow">
+        <div id="box">
+          <p>
+            日期：
+          </p>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            placeholder="日期"
+            v-model="listObj.date"
+          />
+          <p>
+            销售：
+          </p>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            placeholder="销售"
+            v-model="listObj.xiao"
+          />
+          <p>
+            姓名：
+          </p>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            placeholder="姓名"
+            v-model="listObj.name"
+          />
+          <p>
+            电话：
+          </p>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            placeholder="电话"
+            v-model="listObj.tel"
+          />
+          <p>
+            罐数：
+          </p>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            placeholder="罐数"
+            v-model="listObj.num"
+          />
+          <p>
+            地址：
+          </p>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            placeholder="地址"
+            v-model="listObj.dizhi"
+          />
+          <div style="width: 100%; display: flex;">
+            <div style="flex: 1;">
+              快递:
+              <input type="checkbox" v-model="listObj.kuaidi" />
+            </div>
+            <div style="flex: 1;">
+              自提：
+              <input type="checkbox" v-model="listObj.ziti" />
+            </div>
+          </div>
+          <div style="width: 100%; display: flex;">
+            <button
+              type="button"
+              class="btn btn-success"
+              style="flex: 1;"
+              @click="add"
+            >
+              添加
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              style="flex: 1;"
+              @click="qu"
+            >
+              取消
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="tools">
+        <button
+          type="button"
+          class="btn btn-info"
+          id="excell"
+          onclick="method5('dataTable')"
+        >
+          导出为excal
+          <button type="button" class="btn btn-primary" @click="isShow=true">
+            添加内容
+          </button>
+        </button>
+      </div>
+
+      <table border="1" class="table table-bordered" id="dataTable">
+        <thead>
+          <tr>
+            <th width="9%">日期</th>
+            <th width="9%">销售</th>
+            <th width="9%">姓名</th>
+            <th width="15%">电话</th>
+            <th width="9%">罐数</th>
+            <th width="28%">地址</th>
+            <th width="7%">快递</th>
+            <th width="7%">自提</th>
+            <th v-if="list.length!=0" width="7%">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item,index) in list" :key="index">
+            <td>{{item.date}}</td>
+            <td>{{item.xiao}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.tel}}</td>
+            <td>{{item.num}}</td>
+            <td>{{item.dizhi}}</td>
+            <td>
+              <i v-if="item.kuaidi">√</i>
+              <i v-else></i>
+            </td>
+            <td>
+              <i v-if="item.ziti">√</i>
+              <i v-else></i>
+            </td>
+            <td id="caozuo">
+              <button
+                type="button"
+                class="btn btn-danger"
+                @click="splice(index)"
+              >
+                删除
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            isShow: false,
+            list: [],
+            listObj: {
+              date: "",
+              xiao: "",
+              name: "",
+              tel: "",
+              num: "",
+              dizhi: "",
+              kuaidi: false,
+              ziti: false,
+            },
+          };
+        },
+        methods: {
+          add() {
+            console.log(this.listObj);
+            
+            if (this.listObj.date==''&&this.listObj.xiao==''&&this.listObj.name==''&&this.listObj.tel==''&&this.listObj.num==''&&this.listObj.dizhi==''&&this.listObj.kuaidi==false&&this.listObj.ziti==false) {
+              return this.list
+            }else{
+              this.list.push(this.listObj);
+            }
+
+            this.listObj = {
+              date: "",
+              xiao: "",
+              name: "",
+              tel: "",
+              num: "",
+              dizhi: "",
+              kuaidi: false,
+              ziti: false,
+            }
+          },
+          qu() {
+            this.isShow = false;
+          },
+          splice(i) {
+            this.list.splice(i, 1);
+          },
+        },
+      });
+    </script>
+    <script>
+      //打印表格
+      var idTmr;
+
+      function getExplorer() {
+        var explorer = window.navigator.userAgent;
+        //ie
+        if (explorer.indexOf("MSIE") >= 0) {
+          return "ie";
+        }
+        //firefox
+        else if (explorer.indexOf("Firefox") >= 0) {
+          return "Firefox";
+        }
+        //Chrome
+        else if (explorer.indexOf("Chrome") >= 0) {
+          return "Chrome";
+        }
+        //Opera
+        else if (explorer.indexOf("Opera") >= 0) {
+          return "Opera";
+        }
+        //Safari
+        else if (explorer.indexOf("Safari") >= 0) {
+          return "Safari";
+        }
+      }
+
+      function method5(tableid) {
+        var cao = document.getElementById('caozuo')
+        if (getExplorer() == "ie") {
+          var curTbl = document.getElementById(tableid);
+          var oXL = new ActiveXObject("Excel.Application");
+          var oWB = oXL.Workbooks.Add();
+          var xlsheet = oWB.Worksheets(1);
+          var sel = document.body.createTextRange();
+          sel.moveToElementText(curTbl);
+          sel.select();
+          sel.execCommand("Copy");
+          xlsheet.Paste();
+          oXL.Visible = true;
+
+          try {
+            var fname = oXL.Application.GetSaveAsFilename(
+              "Excel.xls",
+              "Excel Spreadsheets (*.xls), *.xls"
+            );
+          } catch (e) {
+            print("Nested catch caught " + e);
+          } finally {
+            oWB.SaveAs(fname);
+            oWB.Close((savechanges = false));
+            oXL.Quit();
+            oXL = null;
+            idTmr = window.setInterval("Cleanup();", 1);
+          }
+        } else {
+          tableToExcel(tableid);
+        }
+      }
+
+      function Cleanup() {
+        window.clearInterval(idTmr);
+        CollectGarbage();
+      }
+      var tableToExcel = (function () {
+        var uri = "data:application/vnd.ms-excel;base64,",
+          template =
+            '<html><head><meta charset="UTF-8"></head><body><table  border="1">{table}</table></body></html>',
+          base64 = function (s) {
+            return window.btoa(unescape(encodeURIComponent(s)));
+          },
+          format = function (s, c) {
+            return s.replace(/{(\w+)}/g, function (m, p) {
+              return c[p];
+            });
+          };
+        return function (table, name) {
+          if (!table.nodeType) table = document.getElementById(table);
+          var ctx = {
+            worksheet: name || "Worksheet",
+            table: table.innerHTML,
+          };
+          window.location.href = uri + base64(format(template, ctx));
+        };
+      })();
+    </script>
+  </body>
+</html>

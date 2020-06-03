@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首字母大写</title>
+</head>
+<body>
+    <script>
+        var str = 'get-element-by-id'
+        function zhuan(str){
+            var strArr = str.split('-');
+            for(let i=1;i<strArr.length;i++){
+                strArr[i] = strArr[i].charAt(0).toUpperCase()+strArr[i].substring(1);
+                // console.log(strArr[i]);
+                
+            }
+            return strArr.join('')
+        }
+       var jieguo = zhuan(str)
+       console.log(jieguo);
+       
+    </script>
+</body>
+</html>

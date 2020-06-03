@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象方法</title>
+</head>
+<body>
+    <script>
+        // 判断一个对象是否为空用Object.keys()判断返回的数组的长度是否为零
+        var obj1 ={
+            name:'张三',
+            age:22
+        }
+       var arr1= Object.keys(obj1)
+       var arr2 = Object.values(obj1)
+       var arr3 = Object.entries(obj1)
+    //    将键值对数组转换成对象
+       var arr4 = Object.fromEntries(arr3)
+    </script>
+</body>
+</html>

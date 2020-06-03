@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>angular</title>
+    <style>
+      * {
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div ng-app="myApp" ng-controller="costCtrl">
+      <!-- {{firstname}} -->
+      {{myHeader}}
+      <!-- {{name+age}} -->
+      <!-- <button ng-click="dian(1,$event)">切换{{is}}</button> -->
+      <!-- <div ng-if="is">123</div>值为真时显示
+    </div> -->
+      <!-- <div ng-hide="is">123</div>值为假时显示
+    </div> -->
+      <!-- <span ng-bind="age"></span> 相当于v-html-->
+      <!-- <input type="text" ng-model="age" ng-blur="changes()"> 相当于v-model-->
+      <!-- 过滤器 -->
+      <!-- <div>{{eglish1 | lowercase}}</div> -->
+      <!-- <div>{{eglish2 | uppercase}}</div> -->
+      <!-- <div>{{age | currency}}</div> -->
+      <!-- 获取下标及遍历 -->
+      <!-- <ul>
+        <li ng-repeat="item in arr" ng-click="idx($index)">
+            <h1>{{item.name}}{{$index}}</h1>
+            <p>{{item.age}}</p>
+            <p>{{item.job}}</p>
+        </li>
+    </ul> -->
+      <div ng-controller="children">
+        <!-- {{lastname}} -->
+        <!-- {{myHeader}} -->
+      </div>
+    </div>
+    <script src="./angular.js"></script>
+    <script src="./route.js"></script>
+    <script>
+      var app = angular.module("myApp", []);
+      app.controller("costCtrl", function ($scope, $timeout) {
+        $scope.myHeader = "Hello World!";
+        // $timeout(function () {
+        //   $scope.myHeader = "How are you today?";
+        // }, 3000);
+        // setTimeout(function(){
+        //   $scope.myHeader = "How are you today?";
+        // },3000)
+      })
+    </script>
+  </body>
+</html>
